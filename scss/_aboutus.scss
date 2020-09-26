@@ -1,0 +1,113 @@
+.about {
+  width: 100%;
+  background-color: rgba(221, 221, 221, 0.247);
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11rem 2rem;
+}
+.about-box {
+  display: flex;
+  .img1 {
+    background-image: url(about/nathon-oski-fE42nRlBcG8-unsplash.jpg);
+    width: 300px;
+    height: 460px;
+    margin-right: 2.5rem;
+    background-position: center;
+    background-size: cover;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  }
+  .img2 {
+    background-image: url(about/rahabi-khan-btgB0KRrKWc-unsplash.jpg);
+    width: 370px;
+    height: 460px;
+    margin-right: 6rem;
+    background-position: center;
+    background-size: cover;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.about-us {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  .about-header {
+    font-size: 7rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    text-align: left;
+  }
+  .about-logo {
+    display: inline-block;
+    width: 6rem;
+    height: 0.3rem;
+    background-color: $gold;
+    margin-bottom: 3rem;
+  }
+  .about-sub {
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    line-height: 2.6rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    width: 70%;
+  }
+  .about-par {
+    font-size: 1.4rem;
+    font-weight: lighter;
+    line-height: 2.6rem;
+    width: 85%;
+    margin-bottom: 3rem;
+  }
+  .viewBtn {
+    padding: 2.2rem 3.2rem;
+    background-color: $gold;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    border: none;
+    color: #fff;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .about-box {
+    flex-direction: column;
+    align-items: center;
+    .img1,
+    .img2 {
+      width: 60%;
+      margin: 0;
+      margin-bottom: 2rem;
+    }
+  }
+  .about-par {
+    width: 100%;
+  }
+}
+.about-us {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  .about-sub {
+    text-align: center;
+  }
+  .about-par {
+    text-align: center;
+  }
+  .bottom {
+    display: flex;
+    flex-direction: column;
+  }
+}

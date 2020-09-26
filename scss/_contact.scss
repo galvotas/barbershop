@@ -1,0 +1,125 @@
+.contact-section {
+  width: 100%;
+  padding: 10rem 3rem;
+  background-image: url(contact_icons/rsz_chris-knight-_h1xxy96pqw-unsplash.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+img {
+  width: 20px;
+}
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  .contact-box {
+    display: flex;
+    h2 {
+      margin: auto;
+      margin-left: 1rem;
+      font-size: 1.2rem;
+      font-weight: bolder;
+      letter-spacing: 0.1rem;
+    }
+  }
+}
+
+.name-email {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  .name {
+    margin-right: 2rem;
+  }
+  input {
+    width: 100%;
+    background-color: transparent;
+    height: 3rem;
+    padding-left: 0.5rem;
+    font-size: 1.2rem;
+    color: #fff;
+    border: none;
+    border-bottom: 2px solid #fff;
+    input:focus {
+      outline: none;
+    }
+  }
+}
+.name,
+.email:focus {
+  outline: none;
+}
+.textInput {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #fff;
+  border-bottom: 2px solid #fff;
+  padding: 0.2rem 0 0 0.5rem;
+  &:focus {
+    outline: none;
+  }
+}
+.agreement {
+  display: flex;
+  color: #fff;
+  margin-top: 1rem;
+  input {
+    margin-right: 1rem;
+  }
+  p {
+    font-size: 1.2rem;
+  }
+}
+.form-submit {
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #fff;
+  border: 2px solid #fff;
+  letter-spacing: 0.1rem;
+  transition: all 0.3s ease-in-out;
+}
+.form-submit:focus {
+  outline: none;
+}
+.form-submit:hover {
+  border: solid 2px $gold;
+  color: $gold;
+  cursor: pointer;
+}
+
+@media only screen and(max-width: 900px) {
+  .contact-section {
+    flex-direction: column;
+  }
+
+  .textInput {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #fff;
+  }
+  .textInput::placeholder {
+    color: #fff;
+    box-shadow: 1px 1px 2px #fff;
+  }
+  input[type="text"] {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 2px #fff;
+  }
+  input[type="text"]::placeholder {
+    color: #fff;
+  }
+  .contact-container {
+    margin-bottom: 2rem;
+  }
+}

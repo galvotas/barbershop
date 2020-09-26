@@ -1,0 +1,67 @@
+.reviews-section {
+  width: 100%;
+  padding: 2rem;
+  background-image: url(reviewBckgrimage.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reviews-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.testimonials {
+  padding: 6rem 1rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    font-size: 5.3rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 3rem;
+    font-weight: bolder;
+    text-align: center;
+  }
+  span {
+    display: inline-block;
+    width: 6rem;
+    height: 0.3rem;
+    background-color: $gold;
+    margin-bottom: 3rem;
+  }
+  p {
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+    margin-bottom: 6rem;
+    text-align: center;
+  }
+  blockquote {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bolder;
+    letter-spacing: 0.1rem;
+  }
+}
+.test-active {
+  animation: fadein 1s ease-in-out;
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

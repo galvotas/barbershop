@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="512" height="512" x="0" y="0" viewBox="0 0 477.867 477.867" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g>
+<g xmlns="http://www.w3.org/2000/svg">
+	<g>
+		<path d="M238.933,0C106.974,0,0,106.974,0,238.933s106.974,238.933,238.933,238.933s238.933-106.974,238.933-238.933    C477.726,107.033,370.834,0.141,238.933,0z M238.933,443.733c-113.108,0-204.8-91.692-204.8-204.8s91.692-204.8,204.8-204.8    s204.8,91.692,204.8,204.8C443.611,351.991,351.991,443.611,238.933,443.733z" fill="#d4af37" data-original="#000000" style="" class=""/>
+	</g>
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+	<g>
+		<path d="M238.933,85.333c-9.426,0-17.067,7.641-17.067,17.067v119.467H102.4c-9.426,0-17.067,7.641-17.067,17.067    S92.974,256,102.4,256h136.533c9.426,0,17.067-7.641,17.067-17.067V102.4C256,92.974,248.359,85.333,238.933,85.333z" fill="#d4af37" data-original="#000000" style="" class=""/>
+	</g>
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<script>// Promises 
+var _eid_promises = {}; 
+if (typeof isignDebug !== 'function') { 
+    var isignDebug = function(msg){}; 
+} 
+// Turn the incoming message from extension 
+// into pending Promise resolving 
+window.addEventListener("message", function(event) { 
+    if(event.source !== window) return; 
+    if(event.data.src &amp;&amp; (event.data.src === "isign-background.js")) { 
+        isignDebug("Page received: "); 
+        isignDebug(event.data); 
+        // Get the promise 
+        if(event.data.nonce) { 
+            var p = _eid_promises[event.data.nonce]; 
+            // resolve 
+            if(event.data.result === "ok") { 
+                if(event.data.signature !== undefined) { 
+                    if(p){ 
+                        p.resolve({hex: event.data.signature}); 
+                    } 
+                } else if(event.data.certificate !== undefined) { 
+                    if(p){ 
+                        var info = {hex: event.data.certificate, module: event.data.module, slot: event.data.slot, name: event.data.name, issuer: event.data.issuer, isLoginCertificate: event.data.isLoginCertificate, isSigningCertificate: event.data.isSigningCertificate, validTo: event.data.validTo, log: event.data.log, driversList: event.data.driversList}; 
+                        if(event.data.hardwareManufacturer){
+                            info.hardwareManufacturer = event.data.hardwareManufacturer;
+                        }
+                        if(event.data.hardwareLabel){
+                            info.hardwareLabel = event.data.hardwareLabel;
+                        }
+                        p.resolve(info); 
+                    } 
+                } else if(event.data.nativeHostVersion !== undefined) { 
+                    var result = {nativeHostVersion: event.data.nativeHostVersion, driversFound: event.data.driversFound, driversList: event.data.driversList}; 
+                    if(event.data.log){ 
+                        result.log = event.data.log; 
+                    } 
+                    if(p){ 
+                        p.resolve(result); 
+                    } 
+                } else if(event.data.version !== undefined) { 
+                    var result = {version: event.data.extension + "/" + event.data.version, driversFound: event.data.driversFound}; 
+                    if(event.data.log){ 
+                        result.log = event.data.log; 
+                    } 
+                    if(p){ 
+                        p.resolve(result); 
+                    } 
+                } else { 
+                    isignDebug("No idea how to handle message"); 
+                    isignDebug(event.data); 
+                } 
+            } else { 
+                // reject 
+                if(p){ 
+                    p.reject(new Error(JSON.stringify(event.data))); 
+                } 
+            } 
+            delete _eid_promises[event.data.nonce]; 
+        } else { 
+            isignDebug("No nonce in event msg"); 
+        } 
+    } 
+}, false); 
+ 
+ 
+function IsignChromeSigning() { 
+    function nonce() { 
+        var val = ""; 
+        var hex = "abcdefghijklmnopqrstuvwxyz0123456789"; 
+        for(var i = 0; i &lt; 16; i++) val += hex.charAt(Math.floor(Math.random() * hex.length)); 
+        return val; 
+    } 
+ 
+    function messagePromise(msg) { 
+        return new Promise(function(resolve, reject) { 
+            // amend with necessary metadata 
+            msg['nonce'] = nonce(); 
+            msg['src'] = 'isign-page.js'; 
+            // send message 
+            window.postMessage(msg, "*"); 
+            // and store promise callbacks 
+            _eid_promises[msg.nonce] = { 
+                resolve: resolve, 
+                reject: reject 
+            }; 
+        }); 
+    } 
+    this.getCertificate = function(options) { 
+        if(options.policyId &amp;&amp; (typeof options.policyIds === 'undefined' || options.policyIds.length == 0)){ 
+            options.policyIds = new Array(); 
+            options.policyIds.push(options.policyId); 
+        } 
+        if(typeof options.residency === 'undefined') { 
+            options.residency = ''; 
+        } 
+        var msg = {type: 'CERT', lang: options.lang, certificatePurpose: options.certificatePurpose, isInitial: options.isInitial, policyId: options.policyId, policyIds: options.policyIds, bulkSigning: options.bulkSigning, residency: options.residency}; 
+        isignDebug("getCertificate()"); 
+        return messagePromise(msg); 
+    }; 
+    this.sign = function(cert, hash, options) { 
+        var msg = {type: 'SIGN', cert: cert.hex, hash: hash.hex, module: cert.module, slot: cert.slot, isLoginCertificate: cert.isLoginCertificate, isSigningCertificate: cert.isSigningCertificate, hashAlgorithm: hash.type, lang: options.lang}; 
+        isignDebug("sign()"); 
+        return messagePromise(msg); 
+    }; 
+    this.getVersion = function() { 
+        isignDebug("getVersion()"); 
+        return messagePromise({ 
+            type: 'VERSION' 
+        }); 
+    }; 
+}</script></g></svg>

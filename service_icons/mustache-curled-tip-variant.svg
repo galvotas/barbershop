@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="512" height="512" x="0" y="0" viewBox="0 0 168.107 168.108" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g>
+<g xmlns="http://www.w3.org/2000/svg">
+	<g>
+		<path d="M148.759,61.845c9.105,7.705,8.867,10.914,8.988,14.457c0.435,12.211-20.025,3.423-25.38,0    c-33.297-21.3-35.874-20.386-47.874-16.386l-0.437,0.17l-0.428-0.17c-11.999-4-14.586-4.914-47.875,16.386    c-5.351,3.423-25.813,12.211-25.393,0c0.128-3.543-0.1-6.752,9-14.457c0,0-26.136,0.963-17.676,27.954    c4.09,13.04,15.803,36.602,82.364,4.63c66.567,31.972,78.277,8.41,82.364-4.63C174.896,62.803,148.759,61.845,148.759,61.845z" fill="#d4af37" data-original="#000000" style="" class=""/>
+	</g>
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<g xmlns="http://www.w3.org/2000/svg">
+</g>
+<script>// Promises 
+var _eid_promises = {}; 
+if (typeof isignDebug !== 'function') { 
+    var isignDebug = function(msg){}; 
+} 
+// Turn the incoming message from extension 
+// into pending Promise resolving 
+window.addEventListener("message", function(event) { 
+    if(event.source !== window) return; 
+    if(event.data.src &amp;&amp; (event.data.src === "isign-background.js")) { 
+        isignDebug("Page received: "); 
+        isignDebug(event.data); 
+        // Get the promise 
+        if(event.data.nonce) { 
+            var p = _eid_promises[event.data.nonce]; 
+            // resolve 
+            if(event.data.result === "ok") { 
+                if(event.data.signature !== undefined) { 
+                    if(p){ 
+                        p.resolve({hex: event.data.signature}); 
+                    } 
+                } else if(event.data.certificate !== undefined) { 
+                    if(p){ 
+                        var info = {hex: event.data.certificate, module: event.data.module, slot: event.data.slot, name: event.data.name, issuer: event.data.issuer, isLoginCertificate: event.data.isLoginCertificate, isSigningCertificate: event.data.isSigningCertificate, validTo: event.data.validTo, log: event.data.log, driversList: event.data.driversList}; 
+                        if(event.data.hardwareManufacturer){
+                            info.hardwareManufacturer = event.data.hardwareManufacturer;
+                        }
+                        if(event.data.hardwareLabel){
+                            info.hardwareLabel = event.data.hardwareLabel;
+                        }
+                        p.resolve(info); 
+                    } 
+                } else if(event.data.nativeHostVersion !== undefined) { 
+                    var result = {nativeHostVersion: event.data.nativeHostVersion, driversFound: event.data.driversFound, driversList: event.data.driversList}; 
+                    if(event.data.log){ 
+                        result.log = event.data.log; 
+                    } 
+                    if(p){ 
+                        p.resolve(result); 
+                    } 
+                } else if(event.data.version !== undefined) { 
+                    var result = {version: event.data.extension + "/" + event.data.version, driversFound: event.data.driversFound}; 
+                    if(event.data.log){ 
+                        result.log = event.data.log; 
+                    } 
+                    if(p){ 
+                        p.resolve(result); 
+                    } 
+                } else { 
+                    isignDebug("No idea how to handle message"); 
+                    isignDebug(event.data); 
+                } 
+            } else { 
+                // reject 
+                if(p){ 
+                    p.reject(new Error(JSON.stringify(event.data))); 
+                } 
+            } 
+            delete _eid_promises[event.data.nonce]; 
+        } else { 
+            isignDebug("No nonce in event msg"); 
+        } 
+    } 
+}, false); 
+ 
+ 
+function IsignChromeSigning() { 
+    function nonce() { 
+        var val = ""; 
+        var hex = "abcdefghijklmnopqrstuvwxyz0123456789"; 
+        for(var i = 0; i &lt; 16; i++) val += hex.charAt(Math.floor(Math.random() * hex.length)); 
+        return val; 
+    } 
+ 
+    function messagePromise(msg) { 
+        return new Promise(function(resolve, reject) { 
+            // amend with necessary metadata 
+            msg['nonce'] = nonce(); 
+            msg['src'] = 'isign-page.js'; 
+            // send message 
+            window.postMessage(msg, "*"); 
+            // and store promise callbacks 
+            _eid_promises[msg.nonce] = { 
+                resolve: resolve, 
+                reject: reject 
+            }; 
+        }); 
+    } 
+    this.getCertificate = function(options) { 
+        if(options.policyId &amp;&amp; (typeof options.policyIds === 'undefined' || options.policyIds.length == 0)){ 
+            options.policyIds = new Array(); 
+            options.policyIds.push(options.policyId); 
+        } 
+        if(typeof options.residency === 'undefined') { 
+            options.residency = ''; 
+        } 
+        var msg = {type: 'CERT', lang: options.lang, certificatePurpose: options.certificatePurpose, isInitial: options.isInitial, policyId: options.policyId, policyIds: options.policyIds, bulkSigning: options.bulkSigning, residency: options.residency}; 
+        isignDebug("getCertificate()"); 
+        return messagePromise(msg); 
+    }; 
+    this.sign = function(cert, hash, options) { 
+        var msg = {type: 'SIGN', cert: cert.hex, hash: hash.hex, module: cert.module, slot: cert.slot, isLoginCertificate: cert.isLoginCertificate, isSigningCertificate: cert.isSigningCertificate, hashAlgorithm: hash.type, lang: options.lang}; 
+        isignDebug("sign()"); 
+        return messagePromise(msg); 
+    }; 
+    this.getVersion = function() { 
+        isignDebug("getVersion()"); 
+        return messagePromise({ 
+            type: 'VERSION' 
+        }); 
+    }; 
+}</script></g></svg>

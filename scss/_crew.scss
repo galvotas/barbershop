@@ -1,0 +1,67 @@
+.crew-section {
+  background-color: rgba(221, 221, 221, 0.247);
+  width: 100%;
+  margin-top: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 3rem;
+}
+.licensed-crew {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  h1 {
+    font-size: 7rem;
+    letter-spacing: 0.1rem;
+    font-weight: bolder;
+    padding-top: 12rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  span {
+    width: 6rem;
+    height: 0.3rem;
+    background-color: $gold;
+  }
+}
+.photo-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+  grid-auto-rows: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  margin-top: 3rem;
+}
+.barber-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80% 20%;
+  background-color: #fff;
+  .img-part {
+    width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.card-bottom {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    font-weight: bolder;
+  }
+  blockquote {
+    color: $gold;
+  }
+}

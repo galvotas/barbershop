@@ -1,0 +1,221 @@
+$gold: #d4af37;
+
+@import "../BarberShop/scss/aboutus";
+@import "../BarberShop/scss/services";
+@import "../BarberShop/scss/reviews";
+@import "../BarberShop/scss/crew";
+@import "../BarberShop/scss/gallery";
+@import "../BarberShop/scss/contact";
+@import "../BarberShop/scss/footer";
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  padding: 1.5rem;
+}
+
+.header {
+  background-image: url(nathon-oski-EW_rqoSdDes-unsplash.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 100vh;
+}
+.burger-box {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 3.5rem;
+  background-color: rgba(0, 0, 0, 1);
+  z-index: 99;
+  margin: auto;
+  cursor: pointer;
+
+  .line {
+    width: 5rem;
+    height: 2px;
+    background-color: $gold;
+    transition: 0.4s ease-out;
+  }
+  .line1 {
+    margin-bottom: 1rem;
+  }
+  .line2 {
+    margin-top: 1rem;
+  }
+  .hamburger {
+    margin: 0;
+  }
+
+  .line-longer {
+    width: 5rem;
+    height: 2px;
+    margin-left: 2.5rem;
+    background-color: $gold;
+    transition: 0.4s ease-out;
+  }
+}
+.active_line1 {
+  transform: translateY(2px) rotate(45deg);
+}
+.active_line2 {
+  transform: translateY(-2px) rotate(-45deg);
+}
+.active_line {
+  transform: translateX(-20rem);
+}
+.header::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  bottom: 0;
+}
+.menu {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1rem solid $gold;
+  z-index: 4;
+  transform: translateX(-170rem);
+  transition: all ease-in-out 0.3s;
+}
+.active_menu {
+  transform: translateX(0);
+}
+.navigation {
+  z-index: 1;
+  padding: 1.5rem;
+  ul {
+    list-style: none;
+    li {
+      margin-bottom: 1rem;
+      padding: 0.3rem 1rem;
+      text-decoration-line: none;
+
+      a {
+        font-size: 4rem;
+        letter-spacing: 0.2rem;
+        color: rgba(255, 255, 255, 0.562);
+        text-decoration-line: none;
+        padding: 0.4rem;
+        transition: 0.3s ease-in-out;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+.contact-box {
+  padding: 1.5rem;
+  color: #fff;
+  z-index: 1;
+  h3 {
+    font-size: 1.5rem;
+    font-weight: bolder;
+  }
+  p {
+    font-size: 1.3rem;
+    font-weight: bolder;
+  }
+}
+.welcome-msg {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  align-items: center;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  .top-msg {
+    font-size: 1.1rem;
+    letter-spacing: 0.3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  .barber {
+    font-size: 7rem;
+    letter-spacing: 0.5rem;
+    font-weight: bolder;
+    font-family: "Yeseva One", serif;
+  }
+  .shop {
+    font-size: 7rem;
+    letter-spacing: 0.5rem;
+    font-weight: bolder;
+    font-family: "Yeseva One", serif;
+  }
+  .icon {
+    width: 5rem;
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: auto;
+    padding: 1rem 0;
+    &::after {
+      content: "";
+      position: absolute;
+      left: -4rem;
+      padding: 1rem;
+      top: 50%;
+      border-radius: 50%;
+      background-color: $gold;
+      transform: translate(0, -50%);
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      right: -4rem;
+      padding: 1rem;
+      top: 50%;
+      border-radius: 50%;
+      background-color: $gold;
+      transform: translate(0, -50%);
+    }
+    img {
+      fill: red;
+      width: 100%;
+    }
+  }
+  .description {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+    font-weight: bolder;
+    font-style: italic;
+    text-transform: uppercase;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .navigation {
+    ul {
+      li {
+        a {
+          font-size: 2.3rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+.service-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12rem;
+}
+.top {
+  margin: 12rem 0 6rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: 6rem;
+    font-weight: bolder;
+    letter-spacing: 0.1rem;
+    margin-bottom: 3rem;
+  }
+  span {
+    display: inline-block;
+    width: 6rem;
+    height: 0.3rem;
+    background-color: $gold;
+    margin-bottom: 3rem;
+  }
+  h3 {
+    text-align: center;
+    width: 60%;
+    font-weight: bold;
+    line-height: 3rem;
+  }
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, auto));
+  gap: 2.5rem;
+  grid-template-rows: 150px 150px;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+.service-style {
+  display: grid;
+  grid-template-columns: 1fr 0.4fr;
+  height: 100%;
+}
+.service-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  img {
+    width: 40%;
+  }
+}
+.service {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  background-color: rgba(221, 221, 221, 0.247);
+  h2 {
+    font-weight: bolder;
+    letter-spacing: 0.05rem;
+  }
+  p {
+    text-align: right;
+    width: 90%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+  }
+  span {
+    font-size: 1.1rem;
+    color: $gold;
+  }
+}
+
+@media only screen and(max-width: 1160px) {
+}

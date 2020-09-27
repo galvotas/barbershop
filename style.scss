@@ -16,12 +16,20 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
-
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
 body {
   font-family: "Montserrat", sans-serif;
   padding: 1.5rem;
+  position: relative;
 }
-
+.wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
 .header {
   background-image: url(nathon-oski-EW_rqoSdDes-unsplash.jpg);
   background-position: center;
@@ -209,6 +217,10 @@ body {
 }
 
 @media only screen and (max-width: 680px) {
+  html {
+    font-size: 45%;
+  }
+
   .navigation {
     ul {
       li {

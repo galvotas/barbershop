@@ -31,7 +31,7 @@ body {
   overflow-x: hidden;
 }
 .header {
-  background-image: url(nathon-oski-EW_rqoSdDes-unsplash.jpg);
+  background-image: url(images/nathon-oski-EW_rqoSdDes-unsplash.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -96,15 +96,15 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
   justify-content: space-around;
   align-items: center;
   border: 1rem solid $gold;
   z-index: 4;
-  transform: translateX(-170rem);
+  transform: translateX(-1000rem);
   transition: all ease-in-out 0.3s;
 }
 .active_menu {
+  display:flex;
   transform: translateX(0);
 }
 .navigation {
